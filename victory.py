@@ -87,8 +87,16 @@ def get_date_str(date):
     return f"{day_text} {month_text} {year_text}"
 
 
+def get_statistic(questions_count, correct_answers):
+    incorrect_answers = questions_count - correct_answers
+    correct_percent = 100 * correct_answers / questions_count
+    incorrect_percent = 100 * incorrect_answers / questions_count
+    return incorrect_answers, correct_percent, incorrect_percent
+
+
 def play_victory():
-    five_famous_peoples = random.sample(FAMOUS_PEOPLES, 5)
+    questions_count = 5
+    five_famous_peoples = random.sample(FAMOUS_PEOPLES, questions_count)
 
     continue_game = True
     while continue_game:
@@ -103,10 +111,7 @@ def play_victory():
                 date_str = get_date_str(famous_people[1])
                 print(f"Правильный ответ: {date_str} года")
 
-        questions_count = 5
-        incorrect_answers = questions_count - correct_answers
-        correct_percent = 100 * correct_answers / questions_count
-        incorrect_percent = 100 * incorrect_answers / questions_count
+        incorrect_answers, correct_percent, incorrect_percent = get_statistic(questions_count, correct_answers)
 
         print(f'Правильных ответов: {correct_answers}')
         print(f'Неправильных ответов: {incorrect_answers}')
